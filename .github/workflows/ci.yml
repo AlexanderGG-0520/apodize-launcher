@@ -33,3 +33,9 @@ jobs:
 
       - name: Run tests
         run: cargo test --workspace
+
+      - name: Export lockfile
+        uses: actions/upload-artifact@v4
+        with:
+          name: cargo-lock
+          path: Cargo.lock
