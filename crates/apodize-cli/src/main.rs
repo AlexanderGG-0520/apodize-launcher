@@ -7,7 +7,11 @@ use clap::{Parser, Subcommand};
 use directories::ProjectDirs;
 
 #[derive(Debug, Parser)]
-#[command(name = "apodize", version, about = "A lightweight Minecraft launcher for the terminal")]
+#[command(
+    name = "apodize",
+    version,
+    about = "A lightweight Minecraft launcher for the terminal"
+)]
 struct Cli {
     /// Override the Apodize data directory.
     #[arg(long, global = true, value_name = "PATH")]

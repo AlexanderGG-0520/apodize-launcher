@@ -166,10 +166,12 @@ impl InstanceRepository for FileInstanceRepository {
                 source,
             })?;
             let entry_path = entry.path();
-            let file_type = entry.file_type().map_err(|source| InstanceError::Metadata {
-                path: entry_path.clone(),
-                source,
-            })?;
+            let file_type = entry
+                .file_type()
+                .map_err(|source| InstanceError::Metadata {
+                    path: entry_path.clone(),
+                    source,
+                })?;
 
             if file_type.is_symlink() {
                 return Err(InstanceError::SymlinkStorage(entry_path));
@@ -250,11 +252,10 @@ fn decode_instance(
         });
     }
 
-    let file: InstanceFileV1 =
-        toml::from_str(content).map_err(|source| InstanceError::Decode {
-            path: path.to_path_buf(),
-            source,
-        })?;
+    let file: InstanceFileV1 = toml::from_str(content).map_err(|source| InstanceError::Decode {
+        path: path.to_path_buf(),
+        source,
+    })?;
     let instance = Instance::try_from(file)?;
 
     if let Some(expected_id) = expected_id
@@ -471,7 +472,12 @@ mod tests {
 
         repository.delete(instance.id()).expect("delete instance");
 
-        assert!(repository.get(instance.id()).expect("query instance").is_none());
+        assert!(
+            repository
+                .get(instance.id())
+                .expect("query instance")
+                .is_none()
+        );
     }
 
     #[test]
@@ -508,7 +514,9 @@ mod tests {
         fs::create_dir_all(&dir).expect("create instance directory");
         fs::write(
             dir.join(INSTANCE_FILE_NAME),
-            format!("schema_version = 999\nunknown_future_field = true\n[instance]\nid = \"{id}\"\n"),
+            format!(
+                "schema_version = 999\nunknown_future_field = true\n[instance]\nid = \"{id}\"\n"
+            ),
         )
         .expect("write future schema file");
 
