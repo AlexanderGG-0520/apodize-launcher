@@ -29,13 +29,7 @@ jobs:
         run: cargo fmt --check
 
       - name: Run Clippy
-        run: cargo clippy --workspace --all-targets --all-features -- -D warnings
+        run: cargo clippy --locked --workspace --all-targets --all-features -- -D warnings
 
       - name: Run tests
-        run: cargo test --workspace
-
-      - name: Export lockfile
-        uses: actions/upload-artifact@v4
-        with:
-          name: cargo-lock
-          path: Cargo.lock
+        run: cargo test --locked --workspace
