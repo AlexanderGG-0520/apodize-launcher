@@ -1,0 +1,26 @@
+[workspace]
+resolver = "3"
+members = [
+    "crates/apodize-core",
+    "crates/apodize-cli",
+    "crates/apodize-tui",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "LGPL-2.1-only"
+repository = "https://github.com/AlexanderGG-0520/apodize-launcher"
+
+[workspace.dependencies]
+clap = { version = "4.6", features = ["derive"] }
+directories = "6"
+serde = { version = "1", features = ["derive"] }
+thiserror = "2"
+toml = "1.1"
+uuid = { version = "1.26", features = ["v7"] }
+
+[profile.release]
+strip = true
+lto = "thin"
+codegen-units = 1
