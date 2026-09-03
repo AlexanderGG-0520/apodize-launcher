@@ -1,0 +1,15 @@
+[package]
+name = "apodize-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[[bin]]
+name = "apodize"
+path = "src/main.rs"
+
+[dependencies]
+apodize-core = { path = "../apodize-core" }
+clap.workspace = true
+directories.workspace = true

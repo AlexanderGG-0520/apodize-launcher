@@ -1,0 +1,10 @@
+[package]
+name = "apodize-tui"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+publish = false
+
+[dependencies]
+apodize-core = { path = "../apodize-core" }
